@@ -12,6 +12,9 @@ class Server {
         this.server=http.createServer(this.app);
         this.auth = '/api/auth';
         this.usuarios = '/api/usuarios';
+        this.tareas = '/api/tareas';
+        this.enunciados = '/api/enunciados';
+        this.items = '/api/items';
         dbConection();
     }
 
@@ -21,6 +24,9 @@ class Server {
         this.app.use(cors());
         this.app.use(this.auth,require('../routes/auth'));
         this.app.use(this.usuarios,require('../routes/usuarios'));
+        this.app.use(this.tareas,require('../routes/tarea'));
+        this.app.use(this.enunciados,require('../routes/enunciado'));
+        this.app.use(this.items,require('../routes/item'));
        
     }
 
