@@ -1,8 +1,8 @@
 const mongoose = require('mongoose'); 
 
-const dbConection =async(conexion=process.env.COLEGIO)=>{
+const dbConection =async()=>{
     try {
-         const con = await mongoose.connect(`${process.env.DB_CNN}/${conexion}`,{
+         const con = await mongoose.connect(process.env.DB_CNN,{
             useCreateIndex:true,
             useFindAndModify:false,
             useNewUrlParser:true,

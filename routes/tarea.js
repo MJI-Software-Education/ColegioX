@@ -7,6 +7,7 @@ const {Router} = require('express');
 const { check } = require('express-validator');
 const { isDate } = require('moment');
 const { getTareas, createTarea, updateTarea, deleteTarea } = require('../controllers/tarea');
+const { unidadExist } = require('../custom/custom-rol');
 const validarCampos = require('../middlewares/validarcampos');
 const validarJWT = require('../middlewares/validarjwt');
 
@@ -17,7 +18,7 @@ router.get('/',[
 ], getTareas);
 
 router.post('/',[
-    check('idUnidad', 'El id de la unidad no es válido').isMongoId(),
+    check('idUnidad', 'El id de la unidad no es válido').custom(unidadExist),
     check('titulo', 'El título de la tarea es requerido').not().isEmpty(),
     check('subtitle', 'El subtítulo es requerido').not().isEmpty(),
     check('dateInit', 'La fecha de inicio es requerida').custom( isDate ),
@@ -27,7 +28,7 @@ router.post('/',[
 ], createTarea);
 
 router.put('/:id',[
-    check('idUnidad', 'El id de la unidad no es válido').isMongoId(),
+    check('idUnidad').custom(unidadExist),
     check('titulo', 'El título de la tarea es requerido').not().isEmpty(),
     check('subtitle', 'El subtítulo es requerido').not().isEmpty(),
     check('dateInit', 'La fecha de inicio es requerida').custom( isDate ),
