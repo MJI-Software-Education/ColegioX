@@ -17,7 +17,7 @@ const getUsuarios = async(req,res=response)=>{
     }
 }
 const newUsuario = async(req,res=response)=>{
-    try {
+  
         try {
             const {email, password} = req.body;
             const verificarUsuario = await Usuario.findOne({email});
@@ -43,12 +43,7 @@ const newUsuario = async(req,res=response)=>{
                 msg:'Error del servidor'
             });
         }
-    } catch (error) {
-        res.status(500).json({
-            ok:false,
-            msg:'Error del servidor'
-        });
-    }
+    
 }
 const editUsuario = async(req,res=response)=>{
     try {

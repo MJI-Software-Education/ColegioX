@@ -2,6 +2,14 @@ const {model, Schema} = require('mongoose');
 
 
 const UsuarioSchema = new Schema({
+    idCurso:{
+        type:String,
+        required:true
+    },
+    idColegio:{
+        type:String,
+        required:true
+    },
     nombre:{
         type:String,
         required:false
@@ -26,6 +34,13 @@ const UsuarioSchema = new Schema({
         type:String,
         default:'USUARIO'
     },
+    asignaturas:[{
+        type:String,
+    }],
+    asistencia:[{
+        type:Schema.Types.ObjectId,
+        ref:'Asistencia'
+    }],
     status:{
         type:Boolean,
         default:true

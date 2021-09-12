@@ -6,7 +6,7 @@
 const {Router} = require('express');
 const { check } = require('express-validator');
 const { getUsuarios, newUsuario, editUsuario, deleteUsuario } = require('../controllers/usuarios');
-const { customRol } = require('../custom/custom-rol');
+const { customRol, cursoExist, colegioExist } = require('../custom/custom-rol');
 const validarRoles = require('../middlewares/validar-rol');
 const validarCampos = require('../middlewares/validarcampos');
 const validarJWT = require('../middlewares/validarjwt');
@@ -19,14 +19,17 @@ router.post('/',[
     check('email','Ingrese un mail valido').isEmail(),
     check('password','El password es requerido').not().isEmpty(),
     check('usuario','El usuario es requerido').not().isEmpty(),
-    validarJWT,
-    validarRoles('ADMINISTRADOR'),
+    check('idCurso').custom(cursoExist),
+    check('idColegio').custom(colegioExist),
+
     validarCampos
 ], newUsuario);
 router.put('/:id',[
     check('email','Ingrese un mail valido').isEmail(),
     check('usuario','El usuario es requerido').not().isEmpty(),
     check('id','El id no es valido').isMongoId(),
+    check('idCurso').custom(cursoExist),
+    check('idColegio').custom(colegioExist),
     validarJWT,
     validarRoles('ADMINISTRADOR'),
     validarCampos
