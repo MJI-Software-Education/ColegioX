@@ -14,6 +14,9 @@ class Server {
         this.usuarios = '/api/usuarios';
         this.asistencia = '/api/asistencia';
         this.material = '/api/material';
+        this.tareas = '/api/tareas';
+        this.enunciados = '/api/enunciados';
+        this.items = '/api/items';
         dbConection();
     }
 
@@ -25,6 +28,10 @@ class Server {
         this.app.use(this.usuarios,require('../routes/usuarios'));
         this.app.use(this.asistencia,require('../routes/asistencia'));
         this.app.use(this.material,require('../routes/material'));
+        this.app.use(this.tareas,require('../routes/tarea'));
+        this.app.use(this.enunciados,require('../routes/enunciado'));
+        this.app.use(this.items,require('../routes/item'));
+       
     }
 
     init(){
